@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="styles.css">
+    <title>Lista de tarefas</title>
+  </head>
+  <body>
+    <!-- Pai -->
+    <div>
+      <!-- #1 div-->
+      <div>
+        <!-- #2 div -->
+        <h1>Lista de tarefas</h1>
+      </div>
+      <div>
+        <input type="text" id="taskinput" placeholder="Adicionar nova tarefa" />
+        <button onclick="addtask()">adicionar</button>
+        <div>
+          <ul id="tasklist"></ul>
+        </div>
+      </div>
+      <script>
+        function addtask() {
+          let taskinput = document.getElementById("taskinput");
+          let tasklist = document.getElementById("tasklist");
+          if (taskinput.value.trim() !== "") {
+            let li = document.createElement("li");
+            let span = document.createElement("span");
+            let deletbutton = document.createElement("button");
+            let updatebutton = document.createElement("button");
+            let donebutton = document.createElement("button");
+            span.textContent = taskinput.value;
+            deletbutton.textContent = "apagar";
+            updatebutton.textContent = "atual";
+            donebutton.textContent = "feito";
+
+            deletbutton.onclick = () => {
+              tasklist.removeChild(li);
+            };
+
+            updatebutton.onclick = () => {
+              let newtask = prompt("editar tarefa:", span.textContent);
+              if(newtask !== null && newtask.trim() !== "") {
+                span.textContent = newtask;
+              }
+            };
+
+            donebutton.onclick = () => {
+              span.classList.toggle("completed");
+            };
+            li.appendChild(span);
+            li.appendChild(deletbutton);
+            li.appendChild(updatebutton);
+            li.appendChild(donebutton);
+            tasklist.appendChild(li);
+            
+            taskinput.value = ""
+          } else {
+
+          }
+        }
+      </script>
+    </div>
+  </body>
+</html>
